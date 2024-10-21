@@ -3,16 +3,16 @@ import {
   BaseExceptionFilter,
   HttpAdapterHost,
 } from '@nestjs/core';
-import { INestApplication, ValidationPipe } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as Sentry from '@sentry/node';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { hostname } from "os";
-import "reflect-metadata";
+import { hostname } from 'os';
+import 'reflect-metadata';
 
-import { EnvironmentVariables } from "src/common/validation";
-import { AppModule } from "./modules/app/app.module";
-
+import { EnvironmentVariables } from 'src/common/validation';
+import { AppModule } from './modules/app/app.module';
+import { HttpExceptionFilter } from './common/filters';
 
 function setupSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
@@ -23,8 +23,7 @@ function setupSwagger(app: INestApplication) {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
-};
-
+}
 
 function setupValidationPipes(app: INestApplication) {
   app.useGlobalPipes(
@@ -34,7 +33,7 @@ function setupValidationPipes(app: INestApplication) {
       transform: true,
     }),
   );
-};
+}
 
 async function createApp() {
   const app = await NestFactory.create(AppModule, {
@@ -47,10 +46,12 @@ async function createApp() {
       whitelist: true,
       forbidNonWhitelisted: false,
       transform: true,
-    })
+    }),
   );
-  app.setGlobalPrefix("api", {
-    exclude: ["api", "health"],
+  app.useGlobalFilters(new HttpExceptionFilter());
+
+  app.setGlobalPrefix('api', {
+    exclude: ['api', 'health'],
   });
   return app;
 }
@@ -63,7 +64,6 @@ function setupSentry(app, configService: ConfigService<EnvironmentVariables>) {
 }
 
 async function bootstrap() {
-
   const app = await createApp();
 
   const configService =
@@ -73,12 +73,12 @@ async function bootstrap() {
   setupSwagger(app);
   setupSentry(app, configService);
 
-  const PORT = configService.get("PORT");
-  const NODE_ENV = configService.get("NODE_ENV");
+  const PORT = configService.get('PORT');
+  const NODE_ENV = configService.get('NODE_ENV');
 
   await app.listen(PORT);
   console.info(
-    `NEWS SUBSCRIBER HAS STARTED AND IT IS LISTENING ON PORT : ${PORT} IN SERVER : ${hostname()} IN THE MODE OF : ${NODE_ENV}`
+    `NEWS SUBSCRIBER HAS STARTED AND IT IS LISTENING ON PORT : ${PORT} IN SERVER : ${hostname()} IN THE MODE OF : ${NODE_ENV}`,
   );
 }
 

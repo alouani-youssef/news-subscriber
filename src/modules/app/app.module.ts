@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { EnvironmentVariablesValidation } from 'src/common/validation';
+import { RateLimitMiddleware } from 'src/common/middlewares';
 
 @Module({
   imports: [
@@ -15,4 +16,10 @@ import { EnvironmentVariablesValidation } from 'src/common/validation';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(RateLimitMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}
