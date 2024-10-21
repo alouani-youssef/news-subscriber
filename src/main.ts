@@ -51,7 +51,7 @@ async function createApp() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   app.setGlobalPrefix('api', {
-    exclude: ['api', 'health'],
+    exclude: ['api', 'health', 'docs'],
   });
   return app;
 }

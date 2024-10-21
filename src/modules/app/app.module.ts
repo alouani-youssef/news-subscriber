@@ -1,9 +1,13 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
+import { TerminusModule } from '@nestjs/terminus';
+
 import { EnvironmentVariablesValidation } from 'src/common/validation';
 import { RateLimitMiddleware } from 'src/common/middlewares';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
 
 @Module({
   imports: [
@@ -12,6 +16,7 @@ import { RateLimitMiddleware } from 'src/common/middlewares';
       isGlobal: true,
       validate: EnvironmentVariablesValidation,
     }),
+    TerminusModule
   ],
   controllers: [AppController],
   providers: [AppService],
