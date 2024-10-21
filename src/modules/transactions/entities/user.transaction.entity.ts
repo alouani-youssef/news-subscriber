@@ -4,7 +4,7 @@ import {
     instanceToPlain,
     plainToInstance,
 } from "class-transformer";
-import { TransactionTypes } from "src/common/types";
+import { UserOperationTypes } from "src/common/types";
 import { User } from "src/modules/users/entities";
 import {
     BaseEntity,
@@ -13,13 +13,11 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     ManyToOne,
-    JoinColumn,
-    Index,
-    Unique,
+    JoinColumn
 } from "typeorm";
 
-@Entity({ name: "transactions" })
-export class Transaction extends BaseEntity {
+@Entity({ name: "user_transactions" })
+export class UserTransaction extends BaseEntity {
 
     @Expose()
     @PrimaryGeneratedColumn()
@@ -31,8 +29,8 @@ export class Transaction extends BaseEntity {
     user: User;
 
     @Expose()
-    @Column({ enum: TransactionTypes, nullable: false })
-    type: TransactionTypes
+    @Column({ enum: UserOperationTypes, nullable: false })
+    type: UserOperationTypes
 
 
     @Expose()
@@ -64,8 +62,8 @@ export class Transaction extends BaseEntity {
 
 
 
-    static fromJson(json: Record<string, any>): Transaction {
-        return plainToInstance(Transaction, json);
+    static fromJson(json: Record<string, any>): UserTransaction {
+        return plainToInstance(UserTransaction, json);
     }
 
     toJson(): Record<string, any> {

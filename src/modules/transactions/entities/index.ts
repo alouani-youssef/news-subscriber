@@ -1,1 +1,1 @@
-export * from './transaction.entity'
+export * from './user.transaction.entity'

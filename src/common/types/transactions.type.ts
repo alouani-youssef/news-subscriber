@@ -1,4 +1,4 @@
-export enum TransactionTypes {
+export enum UserOperationTypes {
     CREATE_USER = 'CREATE_USER',
     UPDATE_USER = 'UPDATE_USER',
     FETCH_USER_INFO = 'FETCH_PROFILE_INFORMATION',
@@ -7,7 +7,7 @@ export enum TransactionTypes {
 }
 
 export type createTransactionDTO = {
-    type: TransactionTypes,
+    type: UserOperationTypes,
     address_ip: string;
     user_agent: string;
     city: string;

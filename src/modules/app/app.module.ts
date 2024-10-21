@@ -19,7 +19,7 @@ import { UsersModule } from '../users/users.module';
 import { TransactionsModule } from '../transactions/transactions.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { RequestTraceInterceptor } from 'src/common/interceptors';
-import { Transaction } from '../transactions/entities';
+import { UserTransaction } from '../transactions/entities';
 
 @Module({
   imports: [
@@ -38,7 +38,7 @@ import { Transaction } from '../transactions/entities';
         password: configService.get('POSTGRES_PASSWORD'),
         port: configService.get('POSTGRES_PORT'),
         database: configService.get('POSTGRES_DATABASE'),
-        entities: [User, Transaction],
+        entities: [User, UserTransaction],
         autoLoadEntities: true,
         synchronize: configService.get('NODE_ENV') === EnvironmentType.development ? true : false,
       }),

@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Transaction } from './entities';
+import { UserTransaction } from './entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { createTransactionDTO } from 'src/common/types';
 import { User } from '../users/entities';
@@ -10,8 +10,8 @@ export class TransactionsService {
     private readonly logger: Logger;
 
     constructor(
-        @InjectRepository(Transaction)
-        private readonly TransactionRepository: Repository<Transaction>,
+        @InjectRepository(UserTransaction)
+        private readonly TransactionRepository: Repository<UserTransaction>,
     ) { }
 
     create(event: createTransactionDTO, user: User) {

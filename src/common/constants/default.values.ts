@@ -11,4 +11,9 @@ export const AUTH_STRATEGY = {
 };
 export const USERS = {
     MAX_SUBSCRIBTIONS: 10,
+    EMAIL_VERFICATION_EXPIRATION_IN_MS: 1000 * 60 * 60,// 1 Hour
+};
+
+export const SECRETS = {
+    HASH_KEY: 'vpRX12W6sIaO2dv91IUOn',
 }
