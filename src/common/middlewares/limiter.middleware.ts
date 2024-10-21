@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import * as rateLimit from 'express-rate-limit';
 import { Request, Response, NextFunction } from 'express';
-import { RATE_LIMITER } from '../constants/default.values';
+import { RATE_LIMITER } from '../constants';
 
 @Injectable()
 export class RateLimitMiddleware implements NestMiddleware {

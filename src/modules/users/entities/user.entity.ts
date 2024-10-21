@@ -17,12 +17,12 @@ import {
 } from "typeorm";
 
 @Entity({ name: "users" })
-@Unique(['id', 'username'])
+@Unique(['username', 'phone_number', 'email'])
 export class User extends BaseEntity {
 
     @Expose()
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Expose()
     @Index({ unique: true })
@@ -33,6 +33,16 @@ export class User extends BaseEntity {
     @Index({ unique: true })
     @Column()
     email: string;
+
+    @Expose()
+    @Index({ unique: true })
+    @Column({ nullable: true })
+    phone_number?: string;
+
+
+    @Expose()
+    @Column()
+    birth_date: Date;
 
     @Expose()
     @Column()
@@ -48,11 +58,20 @@ export class User extends BaseEntity {
 
     @Expose()
     @Column()
-    city: string;
+    city?: string;
+
+    @Expose()
+    @Column()
+    hash: string;
+
+    @Expose()
+    @Column()
+    salt: string;
 
     @Expose()
     @Column()
     is_email_confirmed: boolean;
+
 
     @Expose()
     @Column()

@@ -1,1 +1,2 @@
-export * from './limiter.middleware'
+export * from './limiter.middleware';
+export * from './trace.middleware';

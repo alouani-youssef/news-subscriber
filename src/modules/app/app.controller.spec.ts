@@ -1,22 +1,43 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { HealthCheckService, TypeOrmHealthIndicator } from '@nestjs/terminus';
 
-describe('AppController', () => {
-  let appController: AppController;
+describe('AppService', () => {
+  let appService: AppService;
+  let postgresHealthIndicator: TypeOrmHealthIndicator;
+  let healthCheckService: HealthCheckService;
 
   beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        AppService,
+        {
+          provide: HealthCheckService,
+          useValue: {
+            check: jest.fn(),
+          },
+        },
+        {
+          provide: TypeOrmHealthIndicator,
+          useValue: {
+            pingCheck: jest.fn().mockResolvedValue({ status: 'ok' }),
+          },
+        },
+
+      ],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appService = module.get<AppService>(AppService);
+    postgresHealthIndicator = module.get<TypeOrmHealthIndicator>(TypeOrmHealthIndicator);
+    healthCheckService = module.get<HealthCheckService>(HealthCheckService);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+  describe('getHealth', () => {
+    it('should return health status for postgres, and application', async () => {
+      const result = await appService.getHealth();
+      expect(result?.postgres?.status).toEqual("ok");
+      expect(result?.application?.status).toEqual("ok");
+      expect(postgresHealthIndicator.pingCheck).toHaveBeenCalledWith('postgres');
     });
   });
 });

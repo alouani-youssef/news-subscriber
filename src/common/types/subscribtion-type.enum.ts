@@ -1,0 +1,6 @@
+export enum SUBSCRIPTION_TYPES {
+    API = 'HTTP_API',
+    EMAIL = 'EMAIL',
+    SMS = 'SMS',
+    APPLICATION = 'PUSH_NOTIFICATION',
+};
