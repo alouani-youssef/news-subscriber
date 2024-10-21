@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15.3
+    container_name: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: KPtHgNGMmpbnhZi
+      POSTGRES_DB: news_subscriber
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    network_mode: "host"
+
+  redis:
+    image: redis:latest
+    container_name: redis_database
+    command: redis-server --requirepass KPtHgNGMmpbnhZi
+    volumes:
+      - redis_data:/data
+    network_mode: "host"
+  
+  metabase:
+    image: metabase/metabase:v0.46.4
+    container_name: metabase
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: news_subscriber
+      MB_DB_PORT: 5432
+      MB_DB_USER: root
+      MB_DB_PASS: KPtHgNGMmpbnhZi
+      MB_DB_HOST: localhost
+    depends_on:
+      - postgres
+    network_mode: "host"
+
+volumes:
+  postgres_data:
+  redis_data:
+
