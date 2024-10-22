@@ -16,7 +16,7 @@ const Config = z.object({
     REDIS_PORT: z.preprocess((port) => Number(port), z.number()),
     REDIS_DATABASE: z.preprocess((port) => Number(port), z.number()),
     SENTRY_URL: z.string().url(),
-    BASE_URL: z.string().url(),
+    EXPOSED_URL: z.string().url(),
 });
 
 export function EnvironmentVariablesValidation(

@@ -6,7 +6,7 @@ import { RequestTraceType } from 'src/common/types';
 import { USERS_ERRORS } from 'src/common/constants';
 
 import { UsersService } from './users.service';
-import { CreateDto } from './dtos/create.dto';
+import { CreateDto, LoginDto } from './dtos';
 
 @Controller('users')
 @ApiTags('users')
@@ -46,23 +46,16 @@ export class UsersController {
     }
 
 
-    @Post()
+    @Post('login')
     @ApiOperation({
         description: 'USER LOGIN TO THE SYSTEM',
         summary: 'LOGIN',
     })
-    @ApiBody({ type: CreateDto })
-    async login(@Body() payload: CreateDto, @CurrentRequest() trace: RequestTraceType) {
+    @ApiBody({ type: LoginDto })
+    async login(@Body() payload: LoginDto, @CurrentRequest() trace: RequestTraceType) {
         try {
-            const user = await this.userService.create(payload, trace);
-            if (user) {
-                const creationMessage = {
-                    message: 'ACCOUNT HAS BEEN CREATED',
-                    details: 'YOUR ACCOUNT IS NOW CREATED PLEASE CHECK YOUR EMAIL TO ACTIVATE YOUR ACCOUNT'
-                }
-                return new ResponseV1Dto(true, creationMessage);
-            }
-
+            const access = await this.userService.login(payload.username, payload.passowrd, trace);
+            return new ResponseV1Dto(true, access);
         } catch (error) {
             this.logger.debug(`FAILD TO CREATE USER WITH ERROR : ${JSON.stringify(error)}`)
             throw new HttpException(
@@ -71,7 +64,7 @@ export class UsersController {
                     USERS_ERRORS.CREATION.MESSAGE,
                     error.message
                 ),
-                HttpStatus.BAD_REQUEST
+                HttpStatus.UNAUTHORIZED
             );
         }
     }
