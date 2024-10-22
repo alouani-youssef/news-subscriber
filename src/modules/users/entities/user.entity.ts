@@ -84,7 +84,7 @@ export class User extends BaseEntity {
 
     @Expose()
     @Column()
-    subscribtion_topics_number: number;
+    current_subscribtions: number;
 
     @Expose()
     @Column()

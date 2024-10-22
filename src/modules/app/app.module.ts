@@ -17,10 +17,12 @@ import { AUTH_STRATEGY } from 'src/common/constants';
 import { AuthenticationModule } from '../authentication/authentication.module';
 import { UsersModule } from '../users/users.module';
 import { TransactionsModule } from '../transactions/transactions.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { RequestTraceInterceptor } from 'src/common/interceptors';
-import { UserTransaction } from '../transactions/entities';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { AuthenticateUserterceptor, RequestTraceInterceptor } from 'src/common/interceptors';
+import { SubscrbtionTransaction, UserTransaction } from '../transactions/entities';
 import { Subscribtions } from '../subscribtions/entities';
+import { SubscribtionsModule } from '../subscribtions/subscribtions.module';
+import { AuthGuard } from 'src/common/guards';
 
 @Module({
   imports: [
@@ -39,17 +41,18 @@ import { Subscribtions } from '../subscribtions/entities';
         password: configService.get('POSTGRES_PASSWORD'),
         port: configService.get('POSTGRES_PORT'),
         database: configService.get('POSTGRES_DATABASE'),
-        entities: [User, UserTransaction, Subscribtions],
+        entities: [User, UserTransaction, Subscribtions, SubscrbtionTransaction],
         autoLoadEntities: true,
         synchronize: configService.get('NODE_ENV') === EnvironmentType.development ? true : false,
       }),
     }),
     PassportModule.register({
-      defaultStrategy: AUTH_STRATEGY.NAME
+      defaultStrategy: AUTH_STRATEGY.NAME,
     }),
     AuthenticationModule,
     TransactionsModule,
     UsersModule,
+    SubscribtionsModule,
     TerminusModule
   ],
   controllers: [AppController],
@@ -57,6 +60,10 @@ import { Subscribtions } from '../subscribtions/entities';
     {
       provide: APP_INTERCEPTOR,
       useClass: RequestTraceInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AuthenticateUserterceptor,
     },
   ],
 })

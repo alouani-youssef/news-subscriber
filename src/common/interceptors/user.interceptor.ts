@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
 
 
 @Injectable()
-export class RequestTraceInterceptor implements NestInterceptor {
+export class AuthenticateUserterceptor implements NestInterceptor {
     private readonly logger: Logger;
 
     constructor(
     ) {
-        this.logger = new Logger(RequestTraceInterceptor.name);
+        this.logger = new Logger(AuthenticateUserterceptor.name);
     }
 
     async intercept(
@@ -22,9 +22,9 @@ export class RequestTraceInterceptor implements NestInterceptor {
         next: CallHandler,
     ): Promise<Observable<any>> {
         const request = context.switchToHttp().getRequest();
-        if (request['user'])
+        if (request['authenticate'])
             try {
-                request.currentUser = request['user']
+                request.authenticateUser = request['authenticate']
             } catch (error) {
                 this.logger.fatal(error);
             }

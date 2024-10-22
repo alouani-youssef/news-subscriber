@@ -13,3 +13,10 @@ export const USERS_ERRORS = {
     }
 };
 
+export const SUBSCRIBTION_ERRORS = {
+    CREATION: {
+        CODE: 'SUB_001',
+        MESSAGE: 'FAILD TO CREATE NEW SUBSCRIBTION'
+    }
+};
+

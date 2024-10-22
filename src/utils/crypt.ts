@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import { SECRETS } from 'src/common/constants';
+import { HASH_URL, SECRETS } from 'src/common/constants';
 
 /**
  * @function encrypt
@@ -39,5 +39,18 @@ export function decrypt(hash: string) {
     } catch (error) {
         throw new Error('CAN NOT DECRYPT TOKEN NOT GENERATED WITH THE SAME KEY')
     }
+}
 
+
+export function hashURL(url: string): bigint {
+
+    const hash = crypto.createHash('sha256');
+    hash.update(url);
+
+    const hashHex = hash.digest('hex');
+    const hashInt = BigInt('0x' + hashHex);
+
+    const resultNumber = hashInt % BigInt(HASH_URL.MAX + 1);
+
+    return resultNumber;
 }

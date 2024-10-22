@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { AuthenticationService } from 'src/modules/authentication/authentication.service';
-import { TransactionsService } from 'src/modules/transactions/transactions.service';
+import { UserTransactionsService } from 'src/modules/transactions/services/user.service';
 import { RequestTraceType, UserOperationTypes } from 'src/common/types';
 import { EnvironmentVariables } from 'src/common/validation';
 import { decrypt, encrypt, hashPassword, verifyPassword } from 'src/utils';
@@ -21,7 +21,7 @@ export class UsersService {
         @InjectRepository(User)
         private readonly UserRepository: Repository<User>,
         private readonly authenticationService: AuthenticationService,
-        private readonly transactionService: TransactionsService,
+        private readonly transactionService: UserTransactionsService,
         private readonly configService: ConfigService<EnvironmentVariables>
     ) {
         this.logger = new Logger(UsersService.name);
@@ -44,7 +44,7 @@ export class UsersService {
                 is_active: false,
                 is_deleted: false,
                 is_email_confirmed: false,
-                subscribtion_topics_number: 0,
+                current_subscribtions: 0,
                 max_subscribtion: USERS.MAX_SUBSCRIBTIONS,
                 hash,
                 salt
@@ -56,7 +56,11 @@ export class UsersService {
         } else {
             throw new Error(`CAN NOT CREATE DUPLICATED ACCOUNTS`);
         }
+    }
 
+
+    async getByID(id: number): Promise<User> {
+        return this.UserRepository.findOneBy({ id, is_active: true, is_deleted: false, is_email_confirmed: true });
     }
 
 

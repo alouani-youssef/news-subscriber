@@ -61,7 +61,7 @@ export class CreateDto {
         required: false,
         enum: GENDERS
     })
-    @IsDateString()
+    @IsString()
     gender?: GENDERS;
 
     @ApiProperty({

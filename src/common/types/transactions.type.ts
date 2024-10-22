@@ -7,8 +7,29 @@ export enum UserOperationTypes {
     SUBSCRIBE_TO_TOPIC = 'SUBSCRIBE_TO_TOPIC',
 }
 
-export type createTransactionDTO = {
+
+export enum SubscrbtionOperationTypes {
+    SUBSCRIBE = 'SUBSCRIBE',
+    UN_SUBSCRIBE = 'UN_SUBSCRIBE',
+    STOP_SUBSCRIBTION = 'STOP_SUBSCRIBTION',
+    ACTIVATE_SUBSCRIBTION = 'ACTIVATE_SUBSCRIBTION',
+    DELETE_SUBSCRIBTION = 'DELETE_SUBSCRIBTION',
+    UPDATE_SUBSCRIBTION = 'DELETE_SUBSCRIBTION',
+}
+
+export type createUserTransactionDTO = {
     type: UserOperationTypes,
+    address_ip: string;
+    user_agent: string;
+    city: string;
+    region: string;
+    country: string;
+};
+
+
+export type createSubscrbtionTransactionDTO = {
+    type: SubscrbtionOperationTypes,
+    topic: string,
     address_ip: string;
     user_agent: string;
     city: string;

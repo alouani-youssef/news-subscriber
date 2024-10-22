@@ -32,7 +32,7 @@ export class UsersController {
         description: 'CREATE NEW USER',
         summary: 'CREATE',
     })
-    @ApiBody({ type: CreateDto })
+    @ApiBody({ type: CreateDto, description: 'CREATE USER PAYLOAD' })
     async create(
         @Body() payload: CreateDto,
         @CurrentRequest() trace: RequestTraceType,
