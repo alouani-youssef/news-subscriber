@@ -4,6 +4,7 @@ import {
     instanceToPlain,
     plainToInstance,
 } from "class-transformer";
+import { GENDERS } from "src/common/types";
 import {
     BaseEntity,
     Column,
@@ -39,6 +40,10 @@ export class User extends BaseEntity {
     @Column({ nullable: true })
     phone_number?: string;
 
+
+    @Expose()
+    @Column({ enum: GENDERS })
+    gender?: GENDERS;
 
     @Expose()
     @Column()

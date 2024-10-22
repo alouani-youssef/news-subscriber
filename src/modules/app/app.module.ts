@@ -20,6 +20,7 @@ import { TransactionsModule } from '../transactions/transactions.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { RequestTraceInterceptor } from 'src/common/interceptors';
 import { UserTransaction } from '../transactions/entities';
+import { Subscribtions } from '../subscribtions/entities';
 
 @Module({
   imports: [
@@ -38,7 +39,7 @@ import { UserTransaction } from '../transactions/entities';
         password: configService.get('POSTGRES_PASSWORD'),
         port: configService.get('POSTGRES_PORT'),
         database: configService.get('POSTGRES_DATABASE'),
-        entities: [User, UserTransaction],
+        entities: [User, UserTransaction, Subscribtions],
         autoLoadEntities: true,
         synchronize: configService.get('NODE_ENV') === EnvironmentType.development ? true : false,
       }),

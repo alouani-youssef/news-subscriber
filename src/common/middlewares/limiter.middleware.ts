@@ -12,7 +12,7 @@ export class RateLimitMiddleware implements NestMiddleware {
             windowMs: RATE_LIMITER.WINDOW_MS,
             max: RATE_LIMITER.MAX,
             message: RATE_LIMITER.MESSAGE,
-            skipSuccessfulRequests: true,
+            skipSuccessfulRequests: false,
             skipFailedRequests: false,
             keyGenerator: (req: Request) => {
                 const ipAddress = req.ip;

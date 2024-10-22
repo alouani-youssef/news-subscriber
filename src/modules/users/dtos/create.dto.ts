@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsDateString, IsEmail, IsEnum, IsNumber, IsString, IsStrongPassword, Length } from "class-validator";
+import { GENDERS } from "src/common/types";
 
 export class CreateDto {
 
@@ -53,6 +54,15 @@ export class CreateDto {
     })
     @IsDateString()
     birth_date?: Date;
+
+
+    @ApiProperty({
+        description: 'The user gender which is an enum MALE OR FEMELE',
+        required: false,
+        enum: GENDERS
+    })
+    @IsDateString()
+    gender?: GENDERS;
 
     @ApiProperty({
         description: 'The user passowrd, it should be a strong password',

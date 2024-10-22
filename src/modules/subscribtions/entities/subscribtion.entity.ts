@@ -4,7 +4,6 @@ import {
     instanceToPlain,
     plainToInstance,
 } from "class-transformer";
-import { UserOperationTypes } from "src/common/types";
 import { User } from "src/modules/users/entities";
 import {
     BaseEntity,
@@ -14,10 +13,11 @@ import {
     PrimaryGeneratedColumn,
     ManyToOne,
     JoinColumn,
+    UpdateDateColumn,
 } from "typeorm";
 
-@Entity({ name: "user_transactions" })
-export class UserTransaction extends BaseEntity {
+@Entity({ name: "subscribtions" })
+export class Subscribtions extends BaseEntity {
 
     @Expose()
     @PrimaryGeneratedColumn()
@@ -28,46 +28,37 @@ export class UserTransaction extends BaseEntity {
     @JoinColumn({ name: "user_id" })
     user: User;
 
-    @Expose()
-    @Column({ enum: UserOperationTypes, nullable: false })
-    type: UserOperationTypes
-
 
     @Expose()
     @Column({ nullable: false })
-    address_ip: string
-
-    @Expose()
-    @Column({ nullable: false })
-
-    user_agent: string
-
-    @Expose()
-    @Column({ nullable: false })
-    city: string
+    topic: string;
 
 
     @Expose()
-    @Column({ nullable: false })
-    region: string
+    @Column({ nullable: true })
+    subscribtion_age?: number;
+
 
 
     @Expose()
-    @Column({ nullable: false })
-    country: string
+    @Column({ nullable: false, default: true })
+    is_subscribed: boolean;
 
 
+    @Expose()
+    @Column({ nullable: false, default: false })
+    is_deleted: boolean;
 
-
+    @Exclude()
+    @UpdateDateColumn()
+    updated_at: Date;
 
     @Exclude()
     @CreateDateColumn()
     created_at: Date;
 
-
-
-    static fromJson(json: Record<string, any>): UserTransaction {
-        return plainToInstance(UserTransaction, json);
+    static fromJson(json: Record<string, any>): Subscribtions {
+        return plainToInstance(Subscribtions, json);
     }
 
     toJson(): Record<string, any> {
