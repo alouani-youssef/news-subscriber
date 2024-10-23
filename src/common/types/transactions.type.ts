@@ -1,3 +1,5 @@
+import { SUPPORTED_TOPICS } from "../constants";
+
 export enum UserOperationTypes {
     CREATE_USER = 'CREATE_USER',
     UPDATE_USER = 'UPDATE_USER',
@@ -29,7 +31,7 @@ export type createUserTransactionDTO = {
 
 export type createSubscrbtionTransactionDTO = {
     type: SubscrbtionOperationTypes,
-    topic: string,
+    topic: SUPPORTED_TOPICS,
     address_ip: string;
     user_agent: string;
     city: string;

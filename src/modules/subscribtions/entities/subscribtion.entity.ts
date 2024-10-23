@@ -4,6 +4,7 @@ import {
     instanceToPlain,
     plainToInstance,
 } from "class-transformer";
+import { SUPPORTED_TOPICS } from "src/common/constants";
 import { User } from "src/modules/users/entities";
 import {
     BaseEntity,
@@ -30,9 +31,8 @@ export class Subscribtions extends BaseEntity {
 
 
     @Expose()
-    @Column({ nullable: false })
-    topic: string;
-
+    @Column({ nullable: false, enum: SUPPORTED_TOPICS })
+    topic: SUPPORTED_TOPICS;
 
     @Expose()
     @Column({ nullable: true })

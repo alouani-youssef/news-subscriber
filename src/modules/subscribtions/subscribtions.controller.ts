@@ -31,7 +31,7 @@ export class SubscribtionsController {
             return new ResponseV1Dto(true, subscribtion);
         } catch (error) {
             this.logger.debug(
-                `FAILD TO AUTHENTICATE USER WITH ERROR : ${JSON.stringify(error)}`,
+                `FAILD TO CREATE A USER SUBSCRIBTION WITH ERROR : ${JSON.stringify(error)}`,
             );
             throw new HttpException(
                 new ResponseErrorV1Dto(

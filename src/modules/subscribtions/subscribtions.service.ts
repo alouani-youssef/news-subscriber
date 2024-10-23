@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { User } from '../users/entities';
 import { SubscrbtionTransactionsService } from '../transactions/services/subscribtion.service';
 import { createSubscrbtionTransactionDTO, RequestTraceType, SubscrbtionOperationTypes } from 'src/common/types';
+import { SUPPORTED_TOPICS } from 'src/common/constants';
 
 @Injectable()
 export class SubscribtionsService {
@@ -18,7 +19,7 @@ export class SubscribtionsService {
     ) {
         this.logger = new Logger(SubscribtionsService.name);
     }
-    async create(topic: string, userID: number, trace: RequestTraceType) {
+    async create(topic: SUPPORTED_TOPICS, userID: number, trace: RequestTraceType) {
         const user = await this.userService.getByID(userID);
         if (!user) {
             throw new Error(`YOU ARE NOT ALLOW TO TRIGGER SUBSCRIBTION OPERATION`);

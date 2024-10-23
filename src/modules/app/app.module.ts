@@ -12,17 +12,14 @@ import { User } from 'src/modules/users/entities';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PassportModule } from '@nestjs/passport';
-import { AUTH_STRATEGY } from 'src/common/constants';
 import { AuthenticationModule } from '../authentication/authentication.module';
 import { UsersModule } from '../users/users.module';
 import { TransactionsModule } from '../transactions/transactions.module';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import {  APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthenticateUserterceptor, RequestTraceInterceptor } from 'src/common/interceptors';
 import { SubscrbtionTransaction, UserTransaction } from '../transactions/entities';
 import { Subscribtions } from '../subscribtions/entities';
 import { SubscribtionsModule } from '../subscribtions/subscribtions.module';
-import { AuthGuard } from 'src/common/guards';
 
 @Module({
   imports: [
@@ -45,9 +42,6 @@ import { AuthGuard } from 'src/common/guards';
         autoLoadEntities: true,
         synchronize: configService.get('NODE_ENV') === EnvironmentType.development ? true : false,
       }),
-    }),
-    PassportModule.register({
-      defaultStrategy: AUTH_STRATEGY.NAME,
     }),
     AuthenticationModule,
     TransactionsModule,

@@ -8,14 +8,15 @@ import { AuthenticationService } from './authentication.service';
 @Module({
     imports: [
         PassportModule.register({
-            defaultStrategy: AUTH_STRATEGY.NAME
+            defaultStrategy: AUTH_STRATEGY.NAME,
         }),
         JwtModule.register({
             secret: AUTH_STRATEGY.SECRET,
             global: true,
-            signOptions: { expiresIn: AUTH_STRATEGY.EXPERIS_IN_MINUTES }
-        }),],
+            signOptions: { expiresIn: AUTH_STRATEGY.EXPERIS_IN_MINUTES },
+        }),
+    ],
     providers: [JwtStrategy, AuthenticationService],
-    exports: [JwtStrategy, AuthenticationService, PassportModule]
+    exports: [JwtStrategy, AuthenticationService, PassportModule],
 })
 export class AuthenticationModule { }
