@@ -1,0 +1,36 @@
+## [Unreleased] - 2024-10-23
+
+2c7593b - chore: introduction of jobs module (alouani-youssef, 2024-10-23)
+5013aea - fix(subscribtions): define supported topics for subscribtion (alouani-youssef, 2024-10-23)
+8b50857 - chore: integration of subscribtion module (alouani-youssef, 2024-10-22)
+6b6004f - chore: add subscrbtions module (alouani-youssef, 2024-10-22)
+188d980 - feat: add EXPOSED_URL to .env.example (alouani-youssef, 2024-10-22)
+fb0ea0f - fix(users): verfiication url (alouani-youssef, 2024-10-22)
+c679dca - feat(users): integration of login api (alouani-youssef, 2024-10-22)
+8aa6e40 - chore: integration of users endpoints (alouani-youssef, 2024-10-22)
+91f8e72 - feat(users): integration of user creation  process (alouani-youssef, 2024-10-21)
+7fb78d3 - feat: setup health check endpoint (alouani-youssef, 2024-10-21)
+ac7c9d7 - chore: integration of rate limiter for all routes (alouani-youssef, 2024-10-21)
+ee90b84 - chore: configuration module injection (alouani-youssef, 2024-10-21)
+bc34bc5 - chore: setup final project structure (alouani-youssef, 2024-10-21)
+1527eb5 - chore: restructure the project (alouani-youssef, 2024-10-21)
+7fb240f - setup of project (alouani-youssef, 2024-10-21)
+
+## [Unreleased] - 2024-10-23
+
+2c7593b - chore: introduction of jobs module (alouani-youssef, 2024-10-23)
+5013aea - fix(subscribtions): define supported topics for subscribtion (alouani-youssef, 2024-10-23)
+8b50857 - chore: integration of subscribtion module (alouani-youssef, 2024-10-22)
+6b6004f - chore: add subscrbtions module (alouani-youssef, 2024-10-22)
+188d980 - feat: add EXPOSED_URL to .env.example (alouani-youssef, 2024-10-22)
+fb0ea0f - fix(users): verfiication url (alouani-youssef, 2024-10-22)
+c679dca - feat(users): integration of login api (alouani-youssef, 2024-10-22)
+8aa6e40 - chore: integration of users endpoints (alouani-youssef, 2024-10-22)
+91f8e72 - feat(users): integration of user creation  process (alouani-youssef, 2024-10-21)
+7fb78d3 - feat: setup health check endpoint (alouani-youssef, 2024-10-21)
+ac7c9d7 - chore: integration of rate limiter for all routes (alouani-youssef, 2024-10-21)
+ee90b84 - chore: configuration module injection (alouani-youssef, 2024-10-21)
+bc34bc5 - chore: setup final project structure (alouani-youssef, 2024-10-21)
+1527eb5 - chore: restructure the project (alouani-youssef, 2024-10-21)
+7fb240f - setup of project (alouani-youssef, 2024-10-21)
+
