@@ -17,6 +17,7 @@ const Config = z.object({
     REDIS_DATABASE: z.preprocess((port) => Number(port), z.number()),
     SENTRY_URL: z.string().url(),
     EXPOSED_URL: z.string().url(),
+    NEWSORG_KEY: z.string()
 });
 
 export function EnvironmentVariablesValidation(

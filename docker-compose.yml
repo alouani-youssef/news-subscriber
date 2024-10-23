@@ -14,10 +14,10 @@ services:
 
   redis:
     image: redis:latest
-    container_name: redis_database
+    container_name: redis_
     command: redis-server --requirepass KPtHgNGMmpbnhZi
-    volumes:
-      - redis_data:/data
+    ports:
+      - "6379:6379"
     network_mode: "host"
   
   metabase:

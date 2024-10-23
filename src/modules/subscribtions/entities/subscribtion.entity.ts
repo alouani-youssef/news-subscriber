@@ -4,7 +4,6 @@ import {
     instanceToPlain,
     plainToInstance,
 } from "class-transformer";
-import { SUPPORTED_TOPICS } from "src/common/constants";
 import { User } from "src/modules/users/entities";
 import {
     BaseEntity,
@@ -16,6 +15,9 @@ import {
     JoinColumn,
     UpdateDateColumn,
 } from "typeorm";
+
+import { SUPPORTED_TOPICS } from "src/common/constants";
+
 
 @Entity({ name: "subscribtions" })
 export class Subscribtions extends BaseEntity {

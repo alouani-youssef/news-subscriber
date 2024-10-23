@@ -1,0 +1,4 @@
+export const TOPIC_WATCHER = {
+    JOB_NAME: 'WATCH_TOPIC_JOB',
+    QUEUE_NAME: 'WATCH_TOPIC_QUEUE',
+}

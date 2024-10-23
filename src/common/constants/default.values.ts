@@ -25,3 +25,5 @@ export const SECRETS = {
 export const HASH_URL = {
     MAX: 10000000,
 }
+export const AXIOS_INSTANCE_TOKEN = "AXIOS_INSTANCE_TOKEN";
+export const REDIS_CONNECTION_NAME = 'REDIS_CONNECTION';
